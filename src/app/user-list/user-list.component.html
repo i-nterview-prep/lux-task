@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+  <div class="col-6">
+      <div class="list-group">
+        <a  class="list-group-item list-group-item-action active my-2"
+           *ngFor="let user of users$ | async"
+
+           >
+          <div class="d-flex w-100 justify-content-between"
+          (click)="setCurrentUser(user)"
+          >
+            <img src ={{user.avatar}}/>
+            <div>
+              <h5 class="mb-1">{{user.first_name}} {{user.last_name}}</h5>
+              <small>Email: {{user.email}}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-6 border border-dark">
+    <div class="card" style="width: 18rem;" *ngIf="currentUser">
+      <img src="{{currentUser.avatar}}" class="card-img-top">
+      <div class="card-body">
+        <p class="card-text">{{currentUser.first_name}} {{currentUser.first_name}}</p>
+        <small>Email: {{currentUser.email}}</small>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+</div>
