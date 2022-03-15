@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  private url = "https://reqres.in/api/users?page=1";
+  public url = "https://reqres.in/api/users?page=1";
 
   getUsers():Observable<User[]> {
     return this.http.get<UserResponse>(this.url)
