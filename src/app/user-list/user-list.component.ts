@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { User } from '../types/User';
 
@@ -10,18 +9,18 @@ import { User } from '../types/User';
 })
 export class UserListComponent implements OnInit {
 
-  public users$ : Observable<User[]>;
-  public currentUser: User;
+  // public users$ : Observable<User[]>;
+  // public currentUser: User;
 
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    this.users$ = this.userService.getUsers();
+    // this.users$ = this.userService.getUsers();
   }
 
   public setCurrentUser(user:User){
-    console.log("methd clcked");
-    this.currentUser = user;
+    // console.log("methd clcked");
+    // this.currentUser = user;
   }
 
 }

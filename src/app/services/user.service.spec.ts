@@ -5,51 +5,53 @@ import { UserService } from './user.service';
 
 
 describe('UserService', () => {
-  let service: UserService;
-  let httpClientMock: HttpTestingController;
+
+  let userService: UserService,
+    httpTestingController: HttpTestingController;
+
 
   beforeEach(() => {
-
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule
+      ],
       providers: [
         UserService
       ]
     });
-    service = TestBed.inject(UserService);
-    httpClientMock = TestBed.inject(HttpTestingController);
+
+    userService = TestBed.inject(UserService);
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
+
 
   afterEach(() => {
-    httpClientMock.verify();
+    httpTestingController.verify();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('getUsers method should return list of users', () => {
-    const mockResponse: UserResponse = {
+  it("getUsers should return a list users", () => {
+    let userResponse: UserResponse = {
       data: [
         {
-          id: '1',
-          first_name: 'John',
-          last_name: 'Doe',
-          email: 'johnDoe@aol.com',
-          avatar: 'imgnx:do.pgs'
+          id: "1",
+          first_name: "first",
+          last_name: "last",
+          email: "abc@jk.com",
+          avatar: "url://to//image"
         }
       ]
     }
 
-    service.getUsers().subscribe(users => {
+    userService.getUsers().subscribe(users => {
       expect(users.length).toBe(1);
-      expect(users).toEqual(mockResponse.data);
     });
+    const request = httpTestingController.expectOne(`${userService.url}`);
+    request.flush(userResponse);
 
-
-    const req = httpClientMock.expectOne(`${service.url}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockResponse.data);
 
   });
+
+
+
+
 });
